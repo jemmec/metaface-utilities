@@ -56,7 +56,7 @@ namespace Metaface
 
         private void HandleBlink(BlinkHelper.BlinkEventArgs args)
         {
-            CreateEvent(openCloseLayout, $"eyes <color=#6060ff>blinked</color> event : <color=#ffff60>{args.EyesClosedTime * 1000}ms</color>");
+            CreateEvent(blinkLayout, $"eyes <color=#6060ff>blinked</color> event : <color=#ffff60>{args.EyesClosedTime * 1000}ms</color>");
         }
 
         private void CreateEvent(RectTransform layout, string text)

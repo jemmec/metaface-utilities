@@ -22,7 +22,7 @@ namespace Metaface
 
         [SerializeField]
         [Tooltip("How long the event will display before self destory")]
-        private float eventTtl = 5;
+        private float eventTtl = 8;
 
         void Start()
         {

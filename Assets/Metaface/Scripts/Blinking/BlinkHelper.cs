@@ -22,7 +22,7 @@ namespace Metaface.Utilities
         private bool useFixedUpdate = false;
 
         [SerializeField]
-        [Tooltip("The maximum time the eyes can be closed for a blink to be considered.")]
+        [Tooltip("The maximum time in seconds the eyes can be closed for a blink to be considered.")]
         private float maxEyesClosedTime = 1;
 
         //TODO: Add ability to change what weights can be used to determin blinking
@@ -33,19 +33,11 @@ namespace Metaface.Utilities
         {
             new BlinkParameter(
                 faceExpression: OVRFaceExpressions.FaceExpression.EyesClosedR,
-                threshold: 0.75f
+                threshold: 0.5f
             ),
             new BlinkParameter(
                 faceExpression: OVRFaceExpressions.FaceExpression.EyesClosedL,
-                threshold: 0.75f
-            ),
-            new BlinkParameter(
-                faceExpression: OVRFaceExpressions.FaceExpression.LidTightenerR,
-                threshold: 0.1f
-            ),
-            new BlinkParameter(
-                faceExpression: OVRFaceExpressions.FaceExpression.LidTightenerL,
-                threshold: 0.1f
+                threshold: 0.5f
             )
         };
 

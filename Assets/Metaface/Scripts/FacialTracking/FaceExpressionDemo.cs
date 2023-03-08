@@ -1,60 +1,62 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FaceExpressionDemo : MonoBehaviour
+namespace Metaface.Utilities
 {
-    [SerializeField]
-    OVRFaceExpressions faceExpressions;
-
-    [SerializeField]
-    private FaceWeightComponent faceWeightPrefab;
-
-    [SerializeField]
-    private Transform faceWeightLayout;
-
-    private List<FaceWeightComponent> components = new List<FaceWeightComponent>();
-
-    void Start()
+    public class FaceExpressionDemo : MonoBehaviour
     {
-        //create face weights
-        BuildDemo();
-    }
+        [SerializeField]
+        private OVRFaceExpressions faceExpressions;
 
-    private void BuildDemo()
-    {
-        foreach (OVRFaceExpressions.FaceExpression e in Enum.GetValues(typeof(OVRFaceExpressions.FaceExpression)))
+        [SerializeField]
+        private FaceWeightComponent faceWeightPrefab;
+
+        [SerializeField]
+        private Transform faceWeightLayout;
+
+        private List<FaceWeightComponent> components = new List<FaceWeightComponent>();
+
+        void Start()
         {
-            FaceWeightComponent comp = Instantiate(faceWeightPrefab);
-            comp.transform.SetParent(faceWeightLayout, false);
-            comp.FaceExpression = e;
-            comp.WeightName = e.ToString();
-            components.Add(comp);
+            //create face weights
+            BuildDemo();
         }
 
-        //Hide prefab
-        faceWeightPrefab.gameObject.SetActive(false);
-    }
-
-    void Update()
-    {
-        //Do update
-        foreach (FaceWeightComponent comp in components)
+        private void BuildDemo()
         {
-            float weight;
-            if (faceExpressions.TryGetFaceExpressionWeight(comp.FaceExpression, out weight))
+            foreach (OVRFaceExpressions.FaceExpression e in Enum.GetValues(typeof(OVRFaceExpressions.FaceExpression)))
             {
-                if (!comp.gameObject.activeInHierarchy)
-                    comp.gameObject.SetActive(true);
-                comp.WeightValue = weight;
+                FaceWeightComponent comp = Instantiate(faceWeightPrefab);
+                comp.transform.SetParent(faceWeightLayout, false);
+                comp.FaceExpression = e;
+                comp.WeightName = e.ToString();
+                components.Add(comp);
             }
-            else
+
+            //Hide prefab
+            faceWeightPrefab.gameObject.SetActive(false);
+        }
+
+        void Update()
+        {
+            //Do update
+            foreach (FaceWeightComponent comp in components)
             {
-                if (comp.gameObject.activeInHierarchy)
-                    comp.gameObject.SetActive(false);
+                float weight;
+                if (faceExpressions.TryGetFaceExpressionWeight(comp.FaceExpression, out weight))
+                {
+                    if (!comp.gameObject.activeInHierarchy)
+                        comp.gameObject.SetActive(true);
+                    comp.WeightValue = weight;
+                }
+                else
+                {
+                    if (comp.gameObject.activeInHierarchy)
+                        comp.gameObject.SetActive(false);
+                }
             }
         }
-    }
 
+    }
 }

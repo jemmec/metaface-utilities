@@ -4,31 +4,31 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class FaceWeightComponent : MonoBehaviour
+namespace Metaface.Utilities
 {
-
-
-    [SerializeField]
-    private Slider weightSlider;
-
-    [SerializeField]
-    private TextMeshProUGUI nameText, valueText;
-
-    public string WeightName
+    public class FaceWeightComponent : MonoBehaviour
     {
-        set => nameText.text = value;
+        [SerializeField]
+        private Slider weightSlider;
 
-    }
+        [SerializeField]
+        private TextMeshProUGUI nameText, valueText;
 
-    public float WeightValue
-    {
-        set
+        public string WeightName
         {
-            valueText.text = value.ToString("0.00");
-            weightSlider.SetValueWithoutNotify(value);
+            set => nameText.text = value;
+
         }
+
+        public float WeightValue
+        {
+            set
+            {
+                valueText.text = value.ToString("0.00");
+                weightSlider.SetValueWithoutNotify(value);
+            }
+        }
+
+        public OVRFaceExpressions.FaceExpression FaceExpression { get; set; }
     }
-
-    public OVRFaceExpressions.FaceExpression FaceExpression { get; set; }
-
 }

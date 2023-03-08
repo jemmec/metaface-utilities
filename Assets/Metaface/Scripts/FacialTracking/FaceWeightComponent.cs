@@ -17,7 +17,6 @@ namespace Metaface.Utilities
         public string WeightName
         {
             set => nameText.text = value;
-
         }
 
         public float WeightValue

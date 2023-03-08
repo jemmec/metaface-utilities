@@ -41,6 +41,10 @@ namespace Metaface.Utilities
             )
         };
 
+        /// <summary>
+        /// Associates a threshold value with a particular face expression for evaluating
+        /// if a user has "blinked" or not.
+        /// </summary>
         [System.Serializable]
         public struct BlinkParameter
         {

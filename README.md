@@ -19,7 +19,7 @@ Helper class for blinking events.
 
 ### Blink Parameters
 
-`BlinkParameters` define a list of face expression weights (_`OVRFaceExpression.FaceExpressions`_) and threshold values that define what is considered to be a __blink__. By default the `BlinkParameters` are set to _Left eye closed_ and _Right eye closed_ both with a default weight of `0.5`. A combination of different `FaceExpressions` and threshold values can be used to complicate what the system deems to be a __blink__. 
+`BlinkParameters` are list of face expressions (_`OVRFaceExpression.FaceExpressions`_) and threshold objects that define what is considered to be a __blink__. By default the `BlinkParameters` are set to _Left eye closed_ and _Right eye closed_ both with a default threshold of `0.5`. A combination of different `FaceExpressions` and threshold values can be used to complicate what the system deems to be a __blink__. 
 
 ### Events
 

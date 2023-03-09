@@ -44,9 +44,9 @@ namespace Metaface
             blinkHelper.OnEyeOpen.RemoveListener(HandleEyeOpen);
         }
 
-        private void HandleEyeOpen()
+        private void HandleEyeOpen(float eyesClosedTime)
         {
-            CreateEvent(openCloseLayout, "eyes <color=#ff6060>open</color> event");
+            CreateEvent(openCloseLayout, $"eyes <color=#ff6060>open</color> event : <color=#ffff60>{eyesClosedTime * 1000}ms</color>");
         }
 
         private void HandleEyeClosed()

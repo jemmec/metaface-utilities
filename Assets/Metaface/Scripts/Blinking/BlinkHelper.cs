@@ -13,6 +13,7 @@ namespace Metaface.Utilities
         [Header("Required Classes")]
 
         [SerializeField]
+        [Tooltip("The OVRFaceExpressions class for reading face data")]
         private OVRFaceExpressions faceExpressions;
 
         [Header("Settings")]
@@ -77,6 +78,12 @@ namespace Metaface.Utilities
         /// </summary>
         public EyeCloseEvent OnEyeClose => onEyeClose;
 
+        /// <summary>
+        /// Eye close event class
+        /// </summary>
+        [System.Serializable]
+        public class EyeCloseEvent : UnityEvent { }
+
         [SerializeField]
         private EyeOpenEvent onEyeOpen = new EyeOpenEvent();
 
@@ -84,6 +91,12 @@ namespace Metaface.Utilities
         /// Event that invokes when the eyes are opened
         /// </summary>
         public EyeOpenEvent OnEyeOpen => onEyeOpen;
+
+        /// <summary>
+        /// Eye open event class passes the eyes closed time parameter
+        /// </summary>
+        [System.Serializable]
+        public class EyeOpenEvent : UnityEvent<float> { }
 
         [SerializeField]
         private BlinkEvent onBlink = new BlinkEvent();
@@ -93,6 +106,12 @@ namespace Metaface.Utilities
         /// performed a blink.
         /// </summary>
         public BlinkEvent OnBlink => onBlink;
+
+        /// <summary>
+        /// Blink event class
+        /// </summary>
+        [System.Serializable]
+        public class BlinkEvent : UnityEvent<BlinkEventArgs> { }
 
         /// <summary>
         /// Blink event arguments passed through the event when the user blinks
@@ -111,28 +130,8 @@ namespace Metaface.Utilities
             }
         }
 
-        /// <summary>
-        /// Eye close event class
-        /// </summary>
-        [System.Serializable]
-        public class EyeCloseEvent : UnityEvent { }
-
-        /// <summary>
-        /// Eye open event class
-        /// </summary>
-        [System.Serializable]
-        public class EyeOpenEvent : UnityEvent { }
-
-        /// <summary>
-        /// Blink event class
-        /// </summary>
-        [System.Serializable]
-        public class BlinkEvent : UnityEvent<BlinkEventArgs> { }
-
-
         private bool hasStartedBlink;
         private float blinkTime;
-
 
         private void Awake()
         {
@@ -151,7 +150,9 @@ namespace Metaface.Utilities
                 ProcessBlinking();
         }
 
-
+        /// <summary>
+        /// Processes OVR face expression for blinking
+        /// </summary>
         private void ProcessBlinking()
         {
             if (!faceExpressions) return;
@@ -173,6 +174,9 @@ namespace Metaface.Utilities
             }
         }
 
+        /// <summary>
+        /// Handles starting the blink
+        /// </summary>
         private void HandleBlinkStarted()
         {
             hasStartedBlink = true;
@@ -182,16 +186,26 @@ namespace Metaface.Utilities
             OnEyeClose.Invoke();
         }
 
+        /// <summary>
+        /// Handles stopping the blink
+        /// </summary>
         private void HandleBlinkStopped()
         {
             hasStartedBlink = false;
             //Invoke blinked event if the blink time is less than the max closed time
             if (blinkTime <= maxEyesClosedTime)
                 OnBlink.Invoke(new BlinkEventArgs(eyesClosedTime: blinkTime));
-            //Invoke the eyes open event
-            OnEyeOpen.Invoke();
+            //Invoke the eyes open event with eyes closed time
+            OnEyeOpen.Invoke(blinkTime);
         }
 
+        /// <summary>
+        /// Evaluates the current OVR face expression to determin if it is blinking or not
+        /// uses the passed blink parameters as a metric to consider what a blink is.
+        /// </summary>
+        /// <param name="faceExpressions">The OVRFaceExpressions class for reading face data</param>
+        /// <param name="blinkParameters">The list of BlinkParameters to use</param>
+        /// <returns></returns>
         private bool EvaluateExpression(OVRFaceExpressions faceExpressions, params BlinkParameter[] blinkParameters)
         {
             bool result = true;

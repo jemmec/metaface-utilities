@@ -2,6 +2,8 @@
 
 A small Unity packaged for _more-easily_ utilizing the face tracking and eye gaze systems within the Meta Quest Pro headset. 
 
+This package assumses you have the __Meta Movement__ package installed: https://github.com/oculus-samples/Unity-Movement.git
+
 # Package Contents
 
 ## EyeGazeHelper

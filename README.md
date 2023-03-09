@@ -10,6 +10,9 @@ A small Unity packaged for _more-easily_ utilizing the face tracking and eye gaz
 
 ## BlinkHelper
 
+> Requirements:
+> - Facial Tracking Support
+
 Helper class for blinking events.
 
 ### Blink Parameters

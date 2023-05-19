@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Metaface.Utilities
+namespace Metaface.Debug
 {
     public class FaceExpressionDemo : MonoBehaviour
     {

@@ -63,6 +63,7 @@ namespace Metaface.Utilities
         }
 
 
+
         /// <summary>
         /// Performs a raycast from the particular eye
         /// </summary>
@@ -71,7 +72,7 @@ namespace Metaface.Utilities
         /// <returns></returns>
         private bool RaycastEye(OVREyeGaze gaze, out RaycastHit hit, float distance = 1000f)
         {
-            Debug.DrawRay(gaze.transform.position, gaze.transform.forward * distance, Color.cyan);
+            UnityEngine.Debug.DrawRay(gaze.transform.position, gaze.transform.forward * distance, Color.cyan);
             return Physics.Raycast(gaze.transform.position, gaze.transform.forward, out hit, distance);
         }
 

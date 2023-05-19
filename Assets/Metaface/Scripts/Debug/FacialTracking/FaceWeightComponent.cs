@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-namespace Metaface.Utilities
+namespace Metaface.Debug
 {
     public class FaceWeightComponent : MonoBehaviour
     {

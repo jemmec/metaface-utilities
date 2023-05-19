@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Metaface.Utilities;
 
-namespace Metaface
+namespace Metaface.Debug
 {
 
     public class BlinkLog : MonoBehaviour

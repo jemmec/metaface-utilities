@@ -135,7 +135,7 @@ namespace Metaface.Utilities
 
         private void Awake()
         {
-            Debug.Assert(faceExpressions, "missing reference to OVRFaceExpression class");
+            UnityEngine.Debug.Assert(faceExpressions, "missing reference to OVRFaceExpression class");
         }
 
         private void Update()

@@ -1,11 +1,14 @@
 using UnityEngine;
 
-public class EyeGazeTarget : MonoBehaviour
+namespace Metaface.Debug
 {
+    public class EyeGazeTarget : MonoBehaviour
+    {
 
 
 
 
 
 
+    }
 }

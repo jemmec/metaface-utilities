@@ -32,7 +32,7 @@ namespace Metaface.Utilities
         {
             if (didHit)
             {
-                EyeGazeTarget target = transform.gameObject.GetComponent<EyeGazeTarget>();
+                EyeGazeTarget target = hit.transform.gameObject.GetComponent<EyeGazeTarget>();
                 if (target)
                 {
                     if (!eyeCache.ContainsKey(eyeGaze))

@@ -13,55 +13,56 @@ namespace Metaface.Utilities
         [SerializeField]
         OVREyeGaze rightEye;
 
+        [SerializeField]
+        private bool showRays = false;
+
         private Dictionary<OVREyeGaze, RaycastHit> eyeCache = new Dictionary<OVREyeGaze, RaycastHit>();
 
         void Update()
         {
-
             RaycastHit hitLeft, hitRight;
-            bool didHitLeft = RaycastEye(leftEye, out hitLeft, 1000f);
-            bool didHitRight = RaycastEye(rightEye, out hitRight, 1000f);
+            UpdateEye(RaycastEye(leftEye, out hitLeft, 1000f), leftEye, hitLeft);
+            UpdateEye(RaycastEye(rightEye, out hitRight, 1000f), rightEye, hitRight);
+        }
 
-            if (didHitLeft && didHitRight)
+        private void UpdateEye(bool didHit, OVREyeGaze eyeGaze, RaycastHit hit)
+        {
+            if (didHit)
             {
-                //Hitting the same target
-                if (hitLeft.transform == hitRight.transform)
-                {
-                    //In most cases only should be used
-                    //It implies both eyes are converging on the same object
-
-                    if (hitLeft.transform.gameObject.name == "GazePoint")
-                    {
-                        hitLeft.transform.gameObject.GetComponent<MeshRenderer>().material.color = Color.green; 
-                    }
-                }
+                if (!eyeCache.ContainsKey(eyeGaze))
+                    eyeCache.Add(eyeGaze, hit);
                 else
-                {
-                    //Use confidence to determin which eye wins
-                    if (leftEye.Confidence >= rightEye.Confidence)
-                    {
-                        if (hitLeft.transform.gameObject.name == "GazePoint")
-                            hitLeft.transform.gameObject.GetComponent<MeshRenderer>().material.color = Color.blue;
-                    }
-                    else
-                    {
-                        if (hitRight.transform.gameObject.name == "GazePoint")
-                            hitRight.transform.gameObject.GetComponent<MeshRenderer>().material.color = Color.magenta;
-                    }
-                }
+                    eyeCache[eyeGaze] = hit;
             }
-            else if (didHitLeft)
+            else
             {
-                if (hitLeft.transform.gameObject.name == "GazePoint")
-                    hitLeft.transform.gameObject.GetComponent<MeshRenderer>().material.color = Color.blue;
-            }
-            else if (didHitRight)
-            {
-                if (hitRight.transform.gameObject.name == "GazePoint")
-                    hitRight.transform.gameObject.GetComponent<MeshRenderer>().material.color = Color.magenta;
+                eyeCache.Remove(eyeGaze);
             }
         }
 
+        /// <summary>
+        /// Public helper function to get the current RayCastHit from the left and right eye gaze
+        /// </summary>
+        /// <param name="leftHit"></param>
+        /// <param name="rightHit"></param>
+        /// <returns>True if either left or right hit, false if neither hit</returns>
+        public bool TryGetEyeGazeRaycast(out RaycastHit leftHit, out RaycastHit rightHit)
+        {
+            bool hasHit = false;
+            leftHit = rightHit = default(RaycastHit);
+            //Get the current eye hit from cache
+            if (eyeCache.ContainsKey(leftEye))
+            {
+                leftHit = eyeCache[leftEye];
+                hasHit = true;
+            }
+            if (eyeCache.ContainsKey(rightEye))
+            {
+                rightHit = eyeCache[rightEye];
+                hasHit = true;
+            }
+            return hasHit;
+        }
 
 
         /// <summary>
@@ -72,7 +73,8 @@ namespace Metaface.Utilities
         /// <returns></returns>
         private bool RaycastEye(OVREyeGaze gaze, out RaycastHit hit, float distance = 1000f)
         {
-            UnityEngine.Debug.DrawRay(gaze.transform.position, gaze.transform.forward * distance, Color.cyan);
+            if (showRays)
+                UnityEngine.Debug.DrawRay(gaze.transform.position, gaze.transform.forward * distance, Color.cyan);
             return Physics.Raycast(gaze.transform.position, gaze.transform.forward, out hit, distance);
         }
 

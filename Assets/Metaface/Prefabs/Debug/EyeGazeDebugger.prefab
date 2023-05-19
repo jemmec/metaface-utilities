@@ -472,7 +472,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshRenderer: {fileID: 7925502310033851353}
-  revertDelay: 5
+  revertDelay: 1
 --- !u!1 &7925502310094035497
 GameObject:
   m_ObjectHideFlags: 0
@@ -732,7 +732,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshRenderer: {fileID: 7925502310198595086}
-  revertDelay: 5
+  revertDelay: 1
 --- !u!1 &7925502310301873296
 GameObject:
   m_ObjectHideFlags: 0
@@ -857,7 +857,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshRenderer: {fileID: 7925502310301873301}
-  revertDelay: 5
+  revertDelay: 1
 --- !u!1 &7925502310421452913
 GameObject:
   m_ObjectHideFlags: 0
@@ -1219,7 +1219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshRenderer: {fileID: 7925502311330842907}
-  revertDelay: 5
+  revertDelay: 1
 --- !u!1 &7925502311382050507
 GameObject:
   m_ObjectHideFlags: 0
@@ -1629,7 +1629,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshRenderer: {fileID: 7925502311493629017}
-  revertDelay: 5
+  revertDelay: 1
 --- !u!1 &7925502311632376499
 GameObject:
   m_ObjectHideFlags: 0
@@ -1754,7 +1754,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshRenderer: {fileID: 7925502311632376501}
-  revertDelay: 5
+  revertDelay: 1
 --- !u!1 &7925502311637177041
 GameObject:
   m_ObjectHideFlags: 0
@@ -1879,4 +1879,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshRenderer: {fileID: 7925502311637177042}
-  revertDelay: 5
+  revertDelay: 1

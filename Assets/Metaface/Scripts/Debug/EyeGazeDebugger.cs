@@ -16,22 +16,22 @@ namespace Metaface.Debug
             if (eyeGazeHelper.TryGetEyeGazeRaycast(out left, out right))
             {
                 //Hitting the same target
+                if (left)
+                {
+                    var leftIndicator = left.GetComponent<EyeGazeIndicator>();
+                    leftIndicator.SetColor(Color.cyan);
+                }
+                if (right)
+                {
+                    var rightIndicator = right.GetComponent<EyeGazeIndicator>();
+                    rightIndicator.SetColor(Color.magenta);
+                }
                 if (left && right && left == right)
                 {
                     var leftIndicator = left.GetComponent<EyeGazeIndicator>();
                     leftIndicator.SetColor(Color.green);
                     var rightIndicator = right.GetComponent<EyeGazeIndicator>();
                     rightIndicator.SetColor(Color.green);
-                }
-                else if (left)
-                {
-                    var leftIndicator = left.GetComponent<EyeGazeIndicator>();
-                    leftIndicator.SetColor(Color.cyan);
-                }
-                else if (right)
-                {
-                    var rightIndicator = right.GetComponent<EyeGazeIndicator>();
-                    rightIndicator.SetColor(Color.magenta);
                 }
             }
         }

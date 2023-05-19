@@ -24,8 +24,20 @@ namespace Metaface.Utilities
         void Update()
         {
             RaycastHit hitLeft, hitRight;
-            UpdateEye(RaycastEye(leftEye, out hitLeft, maxGazeDistance), leftEye, hitLeft);
-            UpdateEye(RaycastEye(rightEye, out hitRight, maxGazeDistance), rightEye, hitRight);
+            UpdateEye(
+                RaycastEye(
+                    leftEye,
+                    out hitLeft,
+                    maxGazeDistance),
+                leftEye,
+                hitLeft);
+            UpdateEye(
+                RaycastEye(
+                    rightEye,
+                    out hitRight,
+                    maxGazeDistance),
+                rightEye,
+                hitRight);
         }
 
         private void UpdateEye(bool didHit, OVREyeGaze eyeGaze, RaycastHit hit)
@@ -80,7 +92,7 @@ namespace Metaface.Utilities
         private bool RaycastEye(OVREyeGaze gaze, out RaycastHit hit, float distance = 1000f)
         {
             if (showRays)
-                UnityEngine.Debug.DrawRay(gaze.transform.position, gaze.transform.forward * distance, Color.cyan);
+                UnityEngine.Debug.DrawRay(gaze.transform.position, gaze.transform.forward * distance, Color.red);
             return Physics.Raycast(gaze.transform.position, gaze.transform.forward, out hit, distance);
         }
 

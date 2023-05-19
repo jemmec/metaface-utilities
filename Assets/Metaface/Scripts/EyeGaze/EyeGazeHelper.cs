@@ -19,8 +19,8 @@ namespace Metaface.Utilities
         {
 
             RaycastHit hitLeft, hitRight;
-            bool didHitLeft = RaycastEye(leftEye, out hitLeft);
-            bool didHitRight = RaycastEye(rightEye, out hitRight);
+            bool didHitLeft = RaycastEye(leftEye, out hitLeft, 1000f);
+            bool didHitRight = RaycastEye(rightEye, out hitRight, 1000f);
 
             if (didHitLeft && didHitRight)
             {
@@ -31,7 +31,9 @@ namespace Metaface.Utilities
                     //It implies both eyes are converging on the same object
 
                     if (hitLeft.transform.gameObject.name == "GazePoint")
-                        hitLeft.transform.gameObject.GetComponent<MeshRenderer>().material.color = Color.green;
+                    {
+                        hitLeft.transform.gameObject.GetComponent<MeshRenderer>().material.color = Color.green; 
+                    }
                 }
                 else
                 {
@@ -67,9 +69,10 @@ namespace Metaface.Utilities
         /// <param name="gaze"></param>
         /// <param name="hit"></param>
         /// <returns></returns>
-        private bool RaycastEye(OVREyeGaze gaze, out RaycastHit hit)
+        private bool RaycastEye(OVREyeGaze gaze, out RaycastHit hit, float distance = 1000f)
         {
-            return Physics.Raycast(gaze.transform.position, gaze.transform.forward, out hit, 1000f);
+            Debug.DrawRay(gaze.transform.position, gaze.transform.forward * distance, Color.cyan);
+            return Physics.Raycast(gaze.transform.position, gaze.transform.forward, out hit, distance);
         }
 
     }

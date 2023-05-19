@@ -175,8 +175,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftEye: {fileID: 1141425043}
   rightEye: {fileID: 1066341733}
-  showRays: 0
+  showRays: 1
   maxGazeDistance: 1000
+  eyeGazeLineMaterial: {fileID: 2100000, guid: 87d3b551318eada46856e974b2c29d70, type: 2}
 --- !u!114 &956899249
 MonoBehaviour:
   m_ObjectHideFlags: 0

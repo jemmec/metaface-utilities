@@ -19,7 +19,30 @@ namespace Metaface.Utilities
         [SerializeField]
         private float maxGazeDistance = 1000f;
 
+        [SerializeField]
+        private Material eyeGazeLineMaterial;
+
+        private LineRenderer leftRay, rightRay;
+
         private Dictionary<OVREyeGaze, EyeGazeTarget> eyeCache = new Dictionary<OVREyeGaze, EyeGazeTarget>();
+
+        void Start()
+        {
+            leftRay = CreateRay(Color.red);
+            rightRay = CreateRay(Color.green);
+        }
+
+        private LineRenderer CreateRay(Color color)
+        {
+            var go = new GameObject("EyeRay");
+            go.transform.SetParent(transform);
+            var ray = go.AddComponent<LineRenderer>();
+            ray.startWidth = ray.endWidth = 0.05f;
+            ray.material = eyeGazeLineMaterial;
+            ray.startColor = ray.endColor = color;
+            ray.enabled = showRays;
+            return ray;
+        }
 
         void Update()
         {
@@ -28,6 +51,7 @@ namespace Metaface.Utilities
                 RaycastEye(
                     leftEye,
                     out hitLeft,
+                    leftRay,
                     maxGazeDistance),
                 leftEye,
                 hitLeft);
@@ -35,6 +59,7 @@ namespace Metaface.Utilities
                 RaycastEye(
                     rightEye,
                     out hitRight,
+                    rightRay,
                     maxGazeDistance),
                 rightEye,
                 hitRight);
@@ -89,10 +114,16 @@ namespace Metaface.Utilities
         /// <param name="gaze"></param>
         /// <param name="hit"></param>
         /// <returns></returns>
-        private bool RaycastEye(OVREyeGaze gaze, out RaycastHit hit, float distance = 1000f)
+        private bool RaycastEye(OVREyeGaze gaze, out RaycastHit hit, LineRenderer visualRay, float distance = 1000f)
         {
             if (showRays)
-                UnityEngine.Debug.DrawRay(gaze.transform.position, gaze.transform.forward * distance, Color.red);
+            {
+                visualRay.SetPositions(new Vector3[]
+                {
+                    gaze.transform.position,
+                    gaze.transform.forward * distance
+                });
+            }
             return Physics.Raycast(gaze.transform.position, gaze.transform.forward, out hit, distance);
         }
 

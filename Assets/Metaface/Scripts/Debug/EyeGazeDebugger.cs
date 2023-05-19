@@ -5,10 +5,8 @@ using Metaface.Utilities;
 
 namespace Metaface.Debug
 {
-
     public class EyeGazeDebugger : MonoBehaviour
     {
-
         [SerializeField]
         private EyeGazeHelper eyeGazeHelper;
 
@@ -20,19 +18,22 @@ namespace Metaface.Debug
                 //Hitting the same target
                 if (left && right && left == right)
                 {
-                    //Turn green
+                    var leftIndicator = left.GetComponent<EyeGazeIndicator>();
+                    leftIndicator.SetColor(Color.green);
+                    var rightIndicator = right.GetComponent<EyeGazeIndicator>();
+                    rightIndicator.SetColor(Color.green);
                 }
                 else if (left)
                 {
-                    //Turn cyan   
+                    var leftIndicator = left.GetComponent<EyeGazeIndicator>();
+                    leftIndicator.SetColor(Color.cyan);
                 }
                 else if (right)
                 {
-                    //Turn magenta
+                    var rightIndicator = right.GetComponent<EyeGazeIndicator>();
+                    rightIndicator.SetColor(Color.magenta);
                 }
             }
         }
-
     }
-
 }

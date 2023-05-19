@@ -175,6 +175,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftEye: {fileID: 1141425043}
   rightEye: {fileID: 1066341733}
+  showRays: 0
+  maxGazeDistance: 1000
 --- !u!114 &956899249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -626,6 +628,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7346627920291213532, guid: 7a0fccc8aaf1e1c4f81380c6ad376bce, type: 3}
+      propertyPath: eyeGazeHelper
+      value: 
+      objectReference: {fileID: 956899248}
     - target: {fileID: 7925502310922341563, guid: 7a0fccc8aaf1e1c4f81380c6ad376bce, type: 3}
       propertyPath: m_Name
       value: EyeGazeDebugger

@@ -16,49 +16,55 @@ namespace Metaface.Utilities
         [SerializeField]
         private bool showRays = false;
 
-        private Dictionary<OVREyeGaze, RaycastHit> eyeCache = new Dictionary<OVREyeGaze, RaycastHit>();
+        [SerializeField]
+        private float maxGazeDistance = 1000f;
+
+        private Dictionary<OVREyeGaze, EyeGazeTarget> eyeCache = new Dictionary<OVREyeGaze, EyeGazeTarget>();
 
         void Update()
         {
             RaycastHit hitLeft, hitRight;
-            UpdateEye(RaycastEye(leftEye, out hitLeft, 1000f), leftEye, hitLeft);
-            UpdateEye(RaycastEye(rightEye, out hitRight, 1000f), rightEye, hitRight);
+            UpdateEye(RaycastEye(leftEye, out hitLeft, maxGazeDistance), leftEye, hitLeft);
+            UpdateEye(RaycastEye(rightEye, out hitRight, maxGazeDistance), rightEye, hitRight);
         }
 
         private void UpdateEye(bool didHit, OVREyeGaze eyeGaze, RaycastHit hit)
         {
             if (didHit)
             {
-                if (!eyeCache.ContainsKey(eyeGaze))
-                    eyeCache.Add(eyeGaze, hit);
-                else
-                    eyeCache[eyeGaze] = hit;
+                EyeGazeTarget target = transform.gameObject.GetComponent<EyeGazeTarget>();
+                if (target)
+                {
+                    if (!eyeCache.ContainsKey(eyeGaze))
+                        eyeCache.Add(eyeGaze, target);
+                    else
+                        eyeCache[eyeGaze] = target;
+                    return;
+                }
             }
-            else
-            {
-                eyeCache.Remove(eyeGaze);
-            }
+            eyeCache.Remove(eyeGaze);
         }
 
         /// <summary>
-        /// Public helper function to get the current RayCastHit from the left and right eye gaze
+        /// Public helper function to get the current 
+        /// left and right RayCastHit for the CURRENT frame.
         /// </summary>
-        /// <param name="leftHit"></param>
-        /// <param name="rightHit"></param>
+        /// <param name="leftTarget"></param>
+        /// <param name="rightTarget"></param>
         /// <returns>True if either left or right hit, false if neither hit</returns>
-        public bool TryGetEyeGazeRaycast(out RaycastHit leftHit, out RaycastHit rightHit)
+        public bool TryGetEyeGazeRaycast(out EyeGazeTarget leftTarget, out EyeGazeTarget rightTarget)
         {
             bool hasHit = false;
-            leftHit = rightHit = default(RaycastHit);
+            leftTarget = rightTarget = default(EyeGazeTarget);
             //Get the current eye hit from cache
             if (eyeCache.ContainsKey(leftEye))
             {
-                leftHit = eyeCache[leftEye];
+                leftTarget = eyeCache[leftEye];
                 hasHit = true;
             }
             if (eyeCache.ContainsKey(rightEye))
             {
-                rightHit = eyeCache[rightEye];
+                rightTarget = eyeCache[rightEye];
                 hasHit = true;
             }
             return hasHit;

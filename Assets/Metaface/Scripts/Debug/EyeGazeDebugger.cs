@@ -12,12 +12,26 @@ namespace Metaface.Debug
         [SerializeField]
         private EyeGazeHelper eyeGazeHelper;
 
-
         private void Update()
         {
-            
+            EyeGazeTarget left, right;
+            if (eyeGazeHelper.TryGetEyeGazeRaycast(out left, out right))
+            {
+                //Hitting the same target
+                if (left && right && left == right)
+                {
+                    //Turn green
+                }
+                else if (left)
+                {
+                    //Turn cyan   
+                }
+                else if (right)
+                {
+                    //Turn magenta
+                }
+            }
         }
-
 
     }
 

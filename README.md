@@ -6,6 +6,12 @@ This package assumses you have the __Meta Movement__ package installed: https://
 
 # Package Contents
 
+## EmotionHelper
+
+> Under development
+
+Helper class for easily implementing controls using user emotions.
+
 ## EyeGazeHelper
 
 > Under development

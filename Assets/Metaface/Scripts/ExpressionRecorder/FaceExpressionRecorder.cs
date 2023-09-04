@@ -1,9 +1,6 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
-using Unity.VisualScripting;
-using UnityEditor;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 /// <summary>
@@ -19,6 +16,8 @@ public class FaceExpressionRecorder : MonoBehaviour
     private float recordFPS = 60f;
 
     private bool isRecording = false;
+
+    private string filePath;
 
     public bool _testRun = false;
 
@@ -42,29 +41,49 @@ public class FaceExpressionRecorder : MonoBehaviour
         isRecording = false;
     }
 
-    //Should I use a coroutine???
     private IEnumerator RecordRoutine()
     {
+        string folderPath = System.IO.Path.Join(Application.dataPath, "FaceRecordings");
+        if (!System.IO.Directory.Exists(folderPath))
+            System.IO.Directory.CreateDirectory(folderPath);
+        filePath = System.IO.Path.Join(folderPath, "face_recording.txt");
+        if (!System.IO.File.Exists(filePath))
+            System.IO.File.Create(filePath).Close();
+
+        //CLear file just for testing
+        System.IO.File.WriteAllText(filePath, "");
+
         float time = 0;
+        float timeTotal = 0;
         float fraction = 1000 / recordFPS;
         while (isRecording)
         {
-            timeTally += Time.deltaTime;
             time += Time.deltaTime * 1000;
+            timeTotal += Time.deltaTime;
             if (time >= fraction)
             {
-                WriteFaceData();
+                WriteFaceData(timeTotal);
                 time = 0;
             }
             yield return new WaitForEndOfFrame();
         }
     }
 
-    float timeTally = 0;
-
-    private void WriteFaceData()
+    private void WriteFaceData(float timeStamp)
     {
-        Debug.Log("Time:   " + timeTally + "s");
+        var expressions = Enum.GetNames(typeof(OVRFaceExpressions.FaceExpression));
+        string str = $"{timeStamp};";
+        for (int i = 0; i < expressions.Length; i++)
+        {
+            //Try get the weight
+            float weight;
+            if (ovrFaceExpressions.TryGetFaceExpressionWeight((OVRFaceExpressions.FaceExpression)i, out weight))
+                str += $"{weight};";
+            else
+                str += "0;";
+        }
+        str += "\n";
+        System.IO.File.AppendAllText(filePath, str);
     }
 
 }

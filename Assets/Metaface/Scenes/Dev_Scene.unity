@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.098039225, g: 0.13333334, b: 0.227451, a: 1}
-  m_SkyboxMaterial: {fileID: 0}
+  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -319,7 +319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7311aa03b54a32c468301601ff791c05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ovrFaceExpressions: {fileID: 0}
+  ovrFaceExpressions: {fileID: 8532926148001288498}
   recordFPS: 5
   _testRun: 0
 --- !u!114 &1447012487
@@ -334,6 +334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 716f5f1b10c90d343a14442863642d49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textAsset: {fileID: 4900000, guid: a6bc72e2173bd9f4aa3005750adb2a34, type: 3}
 --- !u!1 &1569546678
 GameObject:
   m_ObjectHideFlags: 0
@@ -1172,6 +1173,22 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8532926147338904655, guid: 5e275ee271aa53a4eba77a1cf45b4097, type: 3}
+      propertyPath: m_ClearFlags
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8532926147338904655, guid: 5e275ee271aa53a4eba77a1cf45b4097, type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8532926147338904655, guid: 5e275ee271aa53a4eba77a1cf45b4097, type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8532926147338904655, guid: 5e275ee271aa53a4eba77a1cf45b4097, type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8532926147847576054, guid: 5e275ee271aa53a4eba77a1cf45b4097, type: 3}
       propertyPath: RotateAroundGuardianCenter
       value: 0
@@ -1186,6 +1203,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8532926147847576062, guid: 5e275ee271aa53a4eba77a1cf45b4097, type: 3}
       propertyPath: requestFaceTrackingPermissionOnStartup
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8532926147857214124, guid: 5e275ee271aa53a4eba77a1cf45b4097, type: 3}
+      propertyPath: m_ClearFlags
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8532926147857214124, guid: 5e275ee271aa53a4eba77a1cf45b4097, type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8532926147857214124, guid: 5e275ee271aa53a4eba77a1cf45b4097, type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8532926147857214124, guid: 5e275ee271aa53a4eba77a1cf45b4097, type: 3}
+      propertyPath: m_BackGroundColor.r
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8532926147857690682, guid: 5e275ee271aa53a4eba77a1cf45b4097, type: 3}
@@ -1235,6 +1268,22 @@ PrefabInstance:
     - target: {fileID: 8532926147857787924, guid: 5e275ee271aa53a4eba77a1cf45b4097, type: 3}
       propertyPath: m_Name
       value: OVRFaceTrackingCharacterController
+      objectReference: {fileID: 0}
+    - target: {fileID: 8532926147857820328, guid: 5e275ee271aa53a4eba77a1cf45b4097, type: 3}
+      propertyPath: m_ClearFlags
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8532926147857820328, guid: 5e275ee271aa53a4eba77a1cf45b4097, type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8532926147857820328, guid: 5e275ee271aa53a4eba77a1cf45b4097, type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8532926147857820328, guid: 5e275ee271aa53a4eba77a1cf45b4097, type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8532926148538973731, guid: 5e275ee271aa53a4eba77a1cf45b4097, type: 3}

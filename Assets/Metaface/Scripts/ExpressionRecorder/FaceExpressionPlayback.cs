@@ -4,15 +4,7 @@ using UnityEngine;
 
 public class FaceExpressionPlayback : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    private TextAsset textAsset;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -19,13 +19,13 @@ public class FaceExpressionRecorder : MonoBehaviour
 
     private string filePath;
 
-    public bool _testRun = false;
+    public bool _testRecord = false;
 
     private void Update()
     {
-        if (_testRun)
+        if (_testRecord)
         {
-            _testRun = false;
+            _testRecord = false;
             StartRecording();
         }
     }
@@ -43,10 +43,12 @@ public class FaceExpressionRecorder : MonoBehaviour
 
     private IEnumerator RecordRoutine()
     {
+        Debug.Log("Starting face recording");
+
         string folderPath = System.IO.Path.Join(Application.dataPath, "FaceRecordings");
         if (!System.IO.Directory.Exists(folderPath))
             System.IO.Directory.CreateDirectory(folderPath);
-        filePath = System.IO.Path.Join(folderPath, "face_recording.txt");
+        filePath = System.IO.Path.Join(folderPath, "test_face_recording.txt");
         if (!System.IO.File.Exists(filePath))
             System.IO.File.Create(filePath).Close();
 
@@ -67,17 +69,22 @@ public class FaceExpressionRecorder : MonoBehaviour
             }
             yield return new WaitForEndOfFrame();
         }
+
+        Debug.Log($"Recoded {timeTotal} seconds of face");
+
     }
 
     private void WriteFaceData(float timeStamp)
     {
         var expressions = Enum.GetNames(typeof(OVRFaceExpressions.FaceExpression));
-        string str = $"{timeStamp};";
-        for (int i = 0; i < expressions.Length; i++)
+        string str = "";
+        for (var expressionIndex = 0;
+                expressionIndex < (int)OVRFaceExpressions.FaceExpression.Max;
+                ++expressionIndex)
         {
             //Try get the weight
             float weight;
-            if (ovrFaceExpressions.TryGetFaceExpressionWeight((OVRFaceExpressions.FaceExpression)i, out weight))
+            if (ovrFaceExpressions.TryGetFaceExpressionWeight((OVRFaceExpressions.FaceExpression)expressionIndex, out weight))
                 str += $"{weight};";
             else
                 str += "0;";
